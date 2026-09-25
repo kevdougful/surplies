@@ -12,9 +12,9 @@ import (
 
 type ScanModes struct {
 	Deep, Git, Coverage, NpmCache, Debug, Broad, BrowserCache, Resolve bool
-	// SkipTempRoots drops the temp directories from the walk. The fixed
-	// staging-name probes still run there, so this narrows traversal rather
-	// than putting temp directories out of scope entirely.
+	// SkipTempRoots drops the temp directories from the walk. The staging
+	// names are still checked at the top of each one, so this narrows
+	// traversal rather than putting temp directories out of scope entirely.
 	SkipTempRoots bool
 }
 
@@ -47,7 +47,7 @@ func DefaultScanHelp(goos string, roots []string) string {
 	if system == "" {
 		system = "none configured"
 	}
-	return fmt.Sprintf("Default full scan: %s\nDefault persistence-only scans: %s\n\nFull scans select manifests, execution targets, and documented injection candidates.\nContent: below 100 MB, five-second read/inspection deadline; recognized assets get header checks.\nInternal directory symlinks are not followed; archives are not unpacked.\n\nExample: surplies -root %s -root %s\n         surplies -root %s -only", home, system, example, tempExample, example)
+	return fmt.Sprintf("Default full scan: %s\nDefault persistence-only scans: %s\n\nFull scans select manifests, execution targets, and documented injection candidates.\nContent: below 100 MB, five-second read/inspection deadline. Recognized assets get header checks.\nInternal directory symlinks are not followed, and archives are not unpacked.\n\nExample: surplies -root %s -root %s\n         surplies -root %s -only", home, system, example, tempExample, example)
 }
 
 // How the default root is spelled for the reader's shell. Help text and the
